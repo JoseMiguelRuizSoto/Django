@@ -1,0 +1,335 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>NOTI-CREO!</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+ <!-- Vendor CSS Files -->
+ <link href="{% static 'vendor/animate.css/animate.min.css'%}" rel="stylesheet">
+ <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+ <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css'%}" rel="stylesheet">
+ <link href="{% static 'vendor/boxicons/css/boxicons.min.css'%}" rel="stylesheet">
+ <link href="{% static 'vendor/glightbox/css/glightbox.min.css'%}" rel="stylesheet">
+ <link href="{% static 'vendor/swiper/swiper-bundle.min.css'%}" rel="stylesheet">
+
+ <!-- Template Main CSS File -->
+ <link href="{% static 'css/style.css'%}" rel="stylesheet">
+
+  <!-- Parsley CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link href="https://parsleyjs.org/src/parsley.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.3.4/parsley.min.js"></script>
+  <!-- =======================================================
+  * Template Name: Eterna
+  * Template URL: https://bootstrapmade.com/eterna-free-multipurpose-bootstrap-template/
+  * Updated: Mar 17 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+
+  <!-- ======= Top Bar ======= -->
+  <section id="topbar" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+      <div class="contact-info d-flex align-items-center">
+        <i class="bi bi-envelope d-flex align-items-center"><a href="https://www.gmail.com/">contacto@noti-creo.cl</a></i>
+        <i class="bi bi-phone d-flex align-items-center ms-4"><span>+569 5589 5548</span></i>
+      </div>
+      <br>
+      
+      {% if usuario %}
+        <p style="color:white;"> Bienvenido {{ usuario }} </p>
+      <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+      </form>
+      {% endif %}
+      <div class="social-links d-none d-md-flex align-items-center">
+        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-between align-items-center">
+
+      <div class="logo">
+        <h1><img src="{% static 'img/logoNoti.jpeg'%}" alt=""></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+      
+      <nav id="navbar" class="navbar">
+        <ul>
+            <li><a href="{% url 'inicio'%}">Inicio</a></li>
+            <li><a href="{% url 'nacional'%}">Nacional</a></li>
+            <li><a href="{% url 'internacional'%}">Internacional</a></li>
+            <li><a href="{% url 'deporte'%}">Deporte</a></li>
+            <li><a href="{% url 'contactoForm'%}">Contáctanos</a></li>
+            <li><a href="{% url 'cargaNoticia'%}">Cargar Noticias</a></li>
+            <li><a href="{% url 'clima'%}">El Tiempo</a></li>
+            {% if not usuario %}
+            <li><a href="{% url 'registro'%}">Regístrate</a></li>
+            <li><a href="{% url 'login'%}">Login</a></li>
+            {% endif %}            
+        </ul>
+
+
+        
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <ol>
+          <li><a href="{% url 'inicio'%}">Inicio</a></li>
+          <li>Regístrate</li>
+        </ol>
+        <h2>Regístrate</h2>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container">
+
+        <div class="row">
+          <div class="">
+            <form action="agregaUsuario" method="POST" role="form" class="php-email-form" data-parsley-validate>
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <!--El nombre de usuario debe tener al menos 8 caracteres de longitud.-->
+                  <input type="text" name="nomUser" class="form-control" id="usuario" placeholder="Tu Nombre Usuario" required data-parsley-length="[8, 20]" data-parsley-pattern="^[a-zA-Z0-9]+$">
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <!--Ingrese una dirección de correo electrónico válida.-->
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Tu Correo" required data-parsley-type="email">
+                </div>
+              </div>
+              <br>
+              
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <!--Asegúrese de que cada campo tenga entre 2 y 25 caracteres.-->
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Tu Nombre Completo" required data-parsley-length="[2, 25]">
+                  </div>
+                  <div class="col-md-6 form-group mt-3 mt-md-0">
+                    <!--Deberá validar el dígito verificador correspondiente.-->
+                    <input type="text" class="form-control" name="rut" id="rut" placeholder="Tu RUT" required data-parsley-rut>
+                  </div>
+                </div>
+
+                <br>
+                  <div class="row">
+                    <div class="col-md-6 form-group">
+                      <!--Asegúrese de que sea mayor de 18 años para registrarse-->
+                      <input type="date" name="fecha" class="form-control" id="fecha" placeholder="Tu Fecha de Nacimiento" required data-parsley-validdate="" data-parsley-minimumage="18">
+                    </div>
+                    <div class="col-md-6 form-group mt-3 mt-md-0">
+                      <!-- Cree una contraseña que contenga al menos 8 caracteres, incluyendo tanto mayúsculas como minúsculas, con un máximo de 10 caracteres.-->
+                      <input type="password" class="form-control" name="contrasena" id="contrasena" placeholder="Tu Contraseña" required data-parsley-length="[8, 10]" data-parsley-uppercase="1" data-parsley-lowercase="1">
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-md-6 form-group">
+                      <!--Ingrese su número de teléfono, solo números son permitidos.-->
+                      <input type="tel" name="telefono" class="form-control" id="telefono" placeholder="Tu Teléfono" required data-parsley-length="[8, 10]" data-parsley-pattern="^[0-9]+$">
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <!-- Seleccione su género entre las opciones proporcionadas (Masculino/ Femenino/ Otros).-->
+                      <select id="genero" name="genero" class="form-control" required data-parsley-required>
+                        <option value="" selected>Genero</option>
+                        <option value="1">Masculino</option>
+                        <option value="2">Femenino</option>
+                        <option value="3">Otros</option>
+                      </select>
+                    </div>
+                  </div>
+                  <br>      
+                  <div class="row">
+                    <div class="col-md-4">
+                      <input type="text" name="direccion" class="form-control" id="inputAddress" placeholder="Dirección" required>
+                    </div>
+                    
+                      <div class="col-md-4">
+                        <input type="text" name="ciudad" class="form-control" id="inputCity" placeholder="Ciudad" required>
+                      </div>
+                      <div class="col-md-4">
+                        
+                        <select id="inputState" name="comuna" class="form-control" required>
+                          <option value="" selected>Comuna</option>
+                          <option value="1">Puente Alto</option>
+                          <option value="2">La Florida</option>
+                          <option value="3">Pirque</option>
+                          <option value="4">Macul</option>
+                          <option value="5">Peñalolen</option>
+                          <option value="6">San Ramón</option>
+                          <option value="7">Cerrillos</option>
+                          <option value="8">Cerro Navia</option>
+                          <option value="9">Conchalí</option>
+                          <option value="10">Estación Central</option>
+                          <option value="11">Huechuraba</option>
+                          <option value="12">Independencia</option>
+                          <option value="13">La Cisterna</option>
+                          <option value="14">La Granja</option>
+                          <option value="15">La Pintana</option>
+                          <option value="16">La Reina</option>
+                          <option value="17">Las Condes</option>
+                          <option value="18">Lo Barnechea</option>
+                          <option value="19">Lo Espejo</option>
+                          <option value="20">Lo Prado</option>
+                          <option value="21">Maipú</option>
+                          <option value="22">Ñuñoa</option>
+                          <option value="23">Pedro Aguirre Cerda</option>
+                          <option value="24">Providencia</option>
+                          <option value="25">Pudahuel</option>
+                          <option value="26">Quilicura</option>
+                          <option value="27">Quinta Normal</option>
+                          <option value="28">Recoleta</option>
+                          <option value="29">Renca</option>
+                          <option value="30">San Joaquín</option>
+                          <option value="31">San Miguel</option>
+                          <option value="32">Santiago </option>
+                          <option value="33">Vitacura</option>
+                          <option value="34">San José de Maipo</option>
+                          <option value="35">San Bernardo</option>
+                          <option value="36">Calera de Tango</option>
+                          <option value="37">Buin</option>
+                          <option value="38">Paine</option>
+                          <option value="39">Colina</option>
+                          <option value="40">Lampa</option>
+                          <option value="41">Til-Til</option>
+                          <option value="42">Alhué</option>
+                          <option value="43">Curacaví</option>
+                          <option value="44">María Pinto</option>
+                          <option value="45">Melipilla </option>
+                          <option value="46">San Pedro</option>
+
+                        </select>
+                      </div>
+                      
+                    </div>
+                  
+                  <br>
+              <div class="text-center"><button type="submit">Guardar</button></div>
+              <br>
+              <div class="text-center"><button type="reset">Limpiar</button></div>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Links de ayuda</h4>
+            <ul>
+                <li><i class="bx bx-chevron-right"></i> <a href="{% url 'inicio'%}">Inicio</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="{% url 'nacional'%}">Nacional</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="{% url 'internacional'%}">Internacional</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="{% url 'deporte'%}">Deportes</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="{% url 'contactoForm'%}">Contáctanos</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="{% url 'listarNoticia'%}">Lista de Noticias</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="{% url 'listarComentario'%}">Lista de Comentarios</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="{% url 'listarUsuario'%}">Lista de Usuarios</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="{% url 'clima'%}">El Tiempo</a></li>
+            </ul>
+          </div>
+
+
+
+          <div class="col-lg-3 col-md-6 footer-contact">
+            <h4>Contáctanos</h4>
+            <p>
+
+              Av. Concha y Toro 1340 c/San Carlos
+              Puente Alto<br>
+              Chile <br><br>
+              <strong>Teléfono:</strong> +569 5589 5548<br>
+              <strong>Email:</strong> informaciones@noti-creo.cl<br>
+            </p>
+
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-info">
+            <h3>Acerca de nosotros</h3>
+            <p>Somos una página de noticias, actualidad nacional, internacional y deportes</p>
+            <div class="social-links mt-3">
+              <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+              <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+              <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+              <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+              <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>NOTI-CREO!</span></strong>. Todos los derechos reservados
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/eterna-free-multipurpose-bootstrap-template/ -->
+        Diseñado por <a href="https://bootstrapmade.com/">BlueBook</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'js/main.js'%}"></script>
+  <script src="{% static 'js/customParsley.js'%}"></script>
+  <script src="{% static 'js/validaciones.js'%}"></script>
+</body>
+
+</html>

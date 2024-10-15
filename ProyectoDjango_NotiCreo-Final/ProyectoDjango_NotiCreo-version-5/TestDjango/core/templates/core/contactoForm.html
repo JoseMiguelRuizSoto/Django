@@ -1,0 +1,265 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>NOTI-CREO!</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'vendor/animate.css/animate.min.css'%}" rel="stylesheet">
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+  <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css'%}" rel="stylesheet">
+  <link href="{% static 'vendor/boxicons/css/boxicons.min.css'%}" rel="stylesheet">
+  <link href="{% static 'vendor/glightbox/css/glightbox.min.css'%}" rel="stylesheet">
+  <link href="{% static 'vendor/swiper/swiper-bundle.min.css'%}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'css/style.css'%}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Eterna
+  * Template URL: https://bootstrapmade.com/eterna-free-multipurpose-bootstrap-template/
+  * Updated: Mar 17 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  
+  <!-- ======= Top Bar ======= -->
+  <section id="topbar" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+      <div class="contact-info d-flex align-items-center">
+        <i class="bi bi-envelope d-flex align-items-center"><a href="https://www.gmail.com/">contacto@noti-creo.cl</a></i>
+        <i class="bi bi-phone d-flex align-items-center ms-4"><span>+569 5589 5548</span></i>
+      </div>
+      <br>
+      
+      {% if usuario %}
+        <p style="color:white;"> Bienvenido {{ usuario }} </p>
+      <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+      </form>
+      {% endif %}
+      <div class="social-links d-none d-md-flex align-items-center">
+        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-between align-items-center">
+
+      <div class="logo">
+        <h1><img src="{% static 'img/logoNoti.jpeg'%}" alt=""></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+      
+      <nav id="navbar" class="navbar">
+        <ul>
+            <li><a href="{% url 'inicio'%}">Inicio</a></li>
+            <li><a href="{% url 'nacional'%}">Nacional</a></li>
+            <li><a href="{% url 'internacional'%}">Internacional</a></li>
+            <li><a href="{% url 'deporte'%}">Deporte</a></li>
+            <li><a href="{% url 'contactoForm'%}">Contáctanos</a></li>
+            <li><a href="{% url 'cargaNoticia'%}">Cargar Noticias</a></li>
+            <li><a href="{% url 'clima'%}">El Tiempo</a></li>
+            {% if not usuario %}
+            <li><a href="{% url 'registro'%}">Regístrate</a></li>
+            <li><a href="{% url 'login'%}">Login</a></li>
+            {% endif %}            
+        </ul>
+
+
+        
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <ol>
+          <li><a href="{% url 'inicio'%}">Inicio</a></li>
+          <li>Contáctanos</li>
+        </ol>
+        <h2>Contáctanos</h2>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container">
+
+        
+        <div class="row">
+          
+
+          <div class="col-lg-6">
+            <div class="info-box mb-4">
+              <i class="bx bx-envelope"></i>
+              <h3>Escribenos</h3>
+              <p>contacto@noti-creo.cl</p>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="info-box  mb-4">
+              <i class="bx bx-phone-call"></i>
+              <h3>Llamanos</h3>
+              <p>+569 5589 5548</p>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="row">
+
+          
+
+          <div class="container">
+            <form method="POST" action="nuevoComentario" class="php-email-form" data-parsley-validate>
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Tu Nombre" required data-parsley-length="[8, 20]" data-parsley-pattern="^[a-zA-Z0-9]+$">
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Tu Correo" required data-parsley-type="email">
+                </div>
+              </div>
+              <div class="form-group mt-3">
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="Asunto" required>
+              </div>
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="message" rows="5" placeholder="Mensaje" required data-parsley-length="[50, 250]"></textarea>
+              </div>
+              <br>
+              <div class="text-center"><button type="submit">Enviar mensaje</button></div>
+              
+              
+              
+              
+            </form>
+          </div>
+          
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Links de ayuda</h4>
+            <ul>
+                <li><i class="bx bx-chevron-right"></i> <a href="{% url 'inicio'%}">Inicio</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="{% url 'nacional'%}">Nacional</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="{% url 'internacional'%}">Internacional</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="{% url 'deporte'%}">Deportes</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="{% url 'contactoForm'%}">Contáctanos</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="{% url 'listarNoticia'%}">Lista de Noticias</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="{% url 'listarComentario'%}">Lista de Comentarios</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="{% url 'listarUsuario'%}">Lista de Usuarios</a></li>
+                <li><i class="bx bx-chevron-right"></i> <a href="{% url 'clima'%}">El Tiempo</a></li>
+            </ul>
+          </div>
+
+
+
+          <div class="col-lg-3 col-md-6 footer-contact">
+            <h4>Contáctanos</h4>
+            <p>
+
+              Av. Concha y Toro 1340 c/San Carlos
+              Puente Alto<br>
+              Chile <br><br>
+              <strong>Teléfono:</strong> +569 5589 5548<br>
+              <strong>Email:</strong> informaciones@noti-creo.cl<br>
+            </p>
+
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-info">
+            <h3>Acerca de nosotros</h3>
+            <p>Somos una página de noticias, actualidad nacional, internacional y deportes</p>
+            <div class="social-links mt-3">
+              <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+              <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+              <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+              <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+              <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>NOTI-CREO!</span></strong>. Todos los derechos reservados
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/eterna-free-multipurpose-bootstrap-template/ -->
+        Diseñado por <a href="https://bootstrapmade.com/">BlueBook</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!--Vendor JS Files-->
+  <script src="{% static 'vendor/purecounter/purecounter_vanilla.js'%}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+  <script src="{% static 'vendor/glightbox/js/glightbox.min.js'%}"></script>
+  <script src="{% static 'vendor/isotope-layout/isotope.pkgd.min.js'%}"></script>
+  <script src="{% static 'vendor/swiper/swiper-bundle.min.js'%}"></script>
+  <script src="{% static 'vendor/waypoints/noframework.waypoints.js'%}"></script>
+  
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'js/main.js'%}"></script>
+  <script src="{% static 'js/customParsley.js'%}"></script>
+  <script src="{% static 'js/validaciones.js'%}"></script>
+</body>
+
+</html>

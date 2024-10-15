@@ -1,0 +1,295 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Nacional-Noti-Creo!</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'vendor/animate.css/animate.min.css'%}" rel="stylesheet">
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+  <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css'%}" rel="stylesheet">
+  <link href="{% static 'vendor/boxicons/css/boxicons.min.css'%}" rel="stylesheet">
+  <link href="{% static 'vendor/glightbox/css/glightbox.min.css'%}" rel="stylesheet">
+  <link href="{% static 'vendor/swiper/swiper-bundle.min.css'%}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'css/style.css'%}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Eterna
+  * Template URL: https://bootstrapmade.com/eterna-free-multipurpose-bootstrap-template/
+  * Updated: Mar 17 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+
+  <!-- ======= Top Bar ======= -->
+  <section id="topbar" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+      <div class="contact-info d-flex align-items-center">
+        <i class="bi bi-envelope d-flex align-items-center"><a href="https://www.gmail.com/">contacto@noti-creo.cl</a></i>
+        <i class="bi bi-phone d-flex align-items-center ms-4"><span>+569 5589 5548</span></i>
+      </div>
+      <br>
+      
+      {% if usuario %}
+        <p style="color:white;"> Bienvenido {{ usuario }} </p>
+      <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+      </form>
+      {% endif %}
+      <div class="social-links d-none d-md-flex align-items-center">
+        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-between align-items-center">
+
+      <div class="logo">
+        <h1><img src="{% static 'img/logoNoti.jpeg'%}" alt=""></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+      
+      <nav id="navbar" class="navbar">
+        <ul>
+            <li><a href="{% url 'inicio'%}">Inicio</a></li>
+            <li><a href="{% url 'nacional'%}">Nacional</a></li>
+            <li><a href="{% url 'internacional'%}">Internacional</a></li>
+            <li><a href="{% url 'deporte'%}">Deporte</a></li>
+            <li><a href="{% url 'contactoForm'%}">Contáctanos</a></li>
+            <li><a href="{% url 'cargaNoticia'%}">Cargar Noticias</a></li>
+            <li><a href="{% url 'clima'%}">El Tiempo</a></li>
+            {% if not usuario %}
+            <li><a href="{% url 'registro'%}">Regístrate</a></li>
+            <li><a href="{% url 'login'%}">Login</a></li>
+            {% endif %}            
+        </ul>
+
+
+        
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <ol>
+          <li><a href="{% url 'inicio'%}">Inicio</a></li>
+          <li>Nacional</li>
+        </ol>
+        <h2>Nacional</h2>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+      <div class="container">
+
+        <div class="row">
+          <div class="col-lg-6">
+            <img src="{% static 'img/nacional1.jpg'%}" class="img-fluid" alt="">
+          </div>
+          <div class="col-lg-6 pt-4 pt-lg-0 content">
+            <h3>Levántese, salga de la casa, disfrute los espacios públicos”: Presidente Boric da el puntapié inicial al Día Internacional del Deporte</h3>
+            <p class="fst-italic">
+              Posteriormente, el Mandatario se trasladó en bicicleta al Estadio Nacional junto al ministro y la subsecretaria de Deportes y el ministro de Transportes Juan Carlos Muñoz, para participar en la actividades que habrán hoy en el recinto deportivo.
+
+            </p>
+           
+            <p>
+              Junto a Jaime Pizarro y Antonia Illanes, ministro y subsecretaria del Deporte, respectivamente, el presidente del Comité Paralímpico de Chile (COPACHI), Sebastián Villavicencio, el vicepresidente del Comité Olímpico de Chile (COCH), Aquiles Gómez, y deportistas del Team Chile y Team Para Chile, el Mandatario participó en partidas de tenis de mesa simultáneas.
+              “Es una alegría estar compartiendo con ustedes desde la Plaza de la Constitución, el centro cívico de Santiago en este Día del Deporte, porque como gobierno nos interesa que todos y todas, independiente de su edad, de su condición socioeconómica, del lugar de donde viven puedan disfrutar de la magia del deporte”, sostuvo el Jefe de Estado.
+              Asimismo, manifestó que espera que el Día del Deporte tenga la misma participación ciudadana que registra año a año el Día del Patrimonio. “Tengo la convicción que con el Día del Deporte podríamos hacer algo parecido. Después de lo Panamericanos y Parapanamericanos, nos dimos cuenta del tremendo entusiasmo que generaba, ya no solo el futbol, sino todos los deportes y también los deportes paralímpicos. Por eso estamos tratando de convertir este día en una fiesta popular”, dijo.
+              Junto con ello instó a la ciudadanía a realizar actividad física y a revisar los panoramas deportivos disponibles a lo largo del país en el sitio web del Día del Deporte. “Es a veces tentador el fin de semana quedarse en cama, sin salir de la casa, pero los quiero invitar a la satisfacción que uno siente cuando uno sale al aire libre y comparte con otros y otras, la satisfacción al momento después de hacer deporte, uno funciona mucho mejor, de verdad”.
+              “Seguramente hay algunos que nos están viendo esta mañana por la tele: levántese, salga de la casa, disfrute los espacios públicos que tenemos como país, recuperemos y construyamos tejido social, porque una sociedad que se encuentra en sus espacios públicos es una sociedad más segura”, agregó.
+              “Estoy convencido que fomentar el deporte, es no un gasto, sino una inversión que nos va a dar rédito en el presente y en el futuro. Estamos aquí con tres seleccionados paralímpicos que acaban de clasificar a los Juegos Olímpicos de París. Los felicito y les entrego todo el reconocimiento y quiero que sepan que son un orgullo para la patria”, cerró.
+              Tras su alocución, el Mandatario se trasladó en bicicleta al Estadio Nacional junto a al ministro y la subsecretaria de Deportes y el ministro de Transportes Juan Carlos Muñoz, para participar en la actividades que habrán hoy en el recinto deportivo.
+              Ya en el coliseo de Ñuñoa, Boric instó a que “el territorio nacional, desde Arica a Magallanes, salga de sus casas, se tome los espacios públicos, se meta a la página web del Día Nacional del Deporte, en donde podrán ver más de 300 actividades. Todos los parques nacionales hoy están abiertos. Tenemos actividades para adultos mayores, niños, atletas de alto rendimiento y para los que somos un poquito más de bajo rendimiento. Estamos felices de poder compartir este espacio”.
+
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Section -->
+
+    <!-- ======= Testimonials Section ======= -->
+    <section id="testimonials" class="testimonials">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Imperdibles Pais</h2>
+        
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-6">
+            <div class="testimonial-item">
+              <img src="{% static 'img/jadue.jpg'%}" class="testimonial-img" alt="">
+              <h3>Auge y caída de Achifarp: La trama del proyecto estrella de Jadue (PC) y la tesis de la defensa para desmarcarlo de ilícitos.
+              </h3>
+              
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="testimonial-item mt-4 mt-lg-0">
+              <img src="{% static 'img/bachelet.avif'%}" class="testimonial-img" alt="">
+              <h3>Michelle Bachelet fue elegida vicepresidenta del Club de Madrid</h3>
+             
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="testimonial-item mt-4">
+              <img src="{% static 'img/nunoa.avif'%}" class="testimonial-img" alt="">
+              <h3>Encuentran cuerpo seccionado al interior de una bolsa en Ñuñoa</h3>
+              
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="testimonial-item mt-4">
+              <img src="{% static 'img/collipulli.avif'%}" class="testimonial-img" alt="">
+              <h3>Detienen a seis comuneros involucrados en muerte de dos agricultores en Collipulli</h3>
+              
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="testimonial-item mt-4">
+              <img src="{% static 'img/factop.webp'%}" class="testimonial-img" alt="">
+              <h3>Factop: ordenan detención de hermanos Sauer y Rodrigo Topelberg por boletas falsas en investigación que dio origen al caso Hermosilla</h3>
+              
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="testimonial-item mt-4">
+              <img src="{% static 'img/trinitarios.avif'%}" class="testimonial-img" alt="">
+              <h3>Machetes, joyas y magia negra: entregan detalles de megaoperativo que terminó con detención de 43 miembros de banda “Los Trinitarios”</h3>
+              
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Testimonials Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Links de ayuda</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'inicio'%}">Inicio</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'nacional'%}">Nacional</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'internacional'%}">Internacional</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'deporte'%}">Deportes</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'contactoForm'%}">Contáctanos</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'listarNoticia'%}">Lista de Noticias</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'listarComentario'%}">Lista de Comentarios</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'listarUsuario'%}">Lista de Usuarios</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'clima'%}">El Tiempo</a></li>
+            </ul>
+          </div>
+
+
+
+          <div class="col-lg-3 col-md-6 footer-contact">
+            <h4>Contáctanos</h4>
+            <p>
+
+              Av. Concha y Toro 1340 c/San Carlos
+              Puente Alto<br>
+              Chile <br><br>
+              <strong>Teléfono:</strong> +569 5589 5548<br>
+              <strong>Email:</strong> informaciones@noti-creo.cl<br>
+            </p>
+
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-info">
+            <h3>Acerca de nosotros</h3>
+            <p>Somos una página de noticias, actualidad nacional, internacional y deportes</p>
+            <div class="social-links mt-3">
+              <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+              <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+              <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+              <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+              <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>NOTI-CREO!</span></strong>. Todos los derechos reservados
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/eterna-free-multipurpose-bootstrap-template/ -->
+        Diseñado por <a href="https://bootstrapmade.com/">BlueBook</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'vendor/purecounter/purecounter_vanilla.js'%}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+  <script src="{% static 'vendor/glightbox/js/glightbox.min.js'%}"></script>
+  <script src="{% static 'vendor/isotope-layout/isotope.pkgd.min.js'%}"></script>
+  <script src="{% static 'vendor/swiper/swiper-bundle.min.js'%}"></script>
+  <script src="{% static 'vendor/waypoints/noframework.waypoints.js'%}"></script>
+  <script src="{% static 'vendor/php-email-form/validate.js'%}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'js/main.js'%}"></script>
+
+</body>
+
+</html>
